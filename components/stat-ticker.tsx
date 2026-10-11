@@ -58,12 +58,20 @@ export function StatTicker({
           started.current = true
           setDisplay(0)
           const t0 = performance.now()
+          let raf = 0
           const tick = (now: number) => {
             const p = Math.min((now - t0) / durationMs, 1)
             setDisplay(value * easeOutCubic(p))
-            if (p < 1) requestAnimationFrame(tick)
+            if (p < 1) raf = requestAnimationFrame(tick)
           }
-          requestAnimationFrame(tick)
+          raf = requestAnimationFrame(tick)
+          // Safety net: if rAF is throttled (background tab, headless render,
+          // power saving) the counter would stay stuck at 0. Guarantee the
+          // final value lands regardless of frame delivery.
+          window.setTimeout(() => {
+            cancelAnimationFrame(raf)
+            setDisplay(value)
+          }, durationMs + 200)
         }
       },
       { threshold: 0.4 }
