@@ -25,7 +25,7 @@ export function LogoCloud({ logos, speedSeconds = 40, className }: LogoCloudProp
         {track.map((l, i) => (
           <span
             key={i}
-            className="shrink-0 select-none text-lg font-medium tracking-tight text-muted-foreground/60 transition-colors duration-200 hover:text-foreground"
+            className="shrink-0 select-none text-lg font-medium tracking-tight text-muted-foreground/75 transition-colors duration-200 hover:text-foreground"
           >
             {l}
           </span>

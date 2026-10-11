@@ -72,12 +72,12 @@ export function PricingLadder({ tiers, bump, className }: PricingLadderProps) {
               <h3 className="text-sm font-medium tracking-tight">{t.name}</h3>
               <p className="mt-1 text-xs text-muted-foreground">{t.role}</p>
 
-              <div className="mt-5 flex items-baseline gap-2">
+              <div className="mt-5 flex items-baseline gap-3">
                 <span className="text-4xl font-semibold tabular-nums tracking-tight">
                   ${t.price}
                 </span>
                 {t.compareAt && (
-                  <span className="text-sm text-muted-foreground line-through tabular-nums">
+                  <span className="text-base text-muted-foreground/80 line-through tabular-nums decoration-muted-foreground/50">
                     ${t.compareAt}
                   </span>
                 )}

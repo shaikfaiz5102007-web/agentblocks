@@ -14,7 +14,8 @@ export function BentoGallery({ items, className }: BentoGalleryProps) {
           className={cn(
             "group relative overflow-hidden rounded-2xl border border-border bg-muted",
             it.span === "2" && "md:col-span-2",
-            it.span === "tall" && "md:row-span-2"
+            it.span === "tall" && "md:row-span-2",
+            !it.span && "md:col-span-1"
           )}
         >
           <img

@@ -34,7 +34,10 @@ export function StatTicker({
   decimals = 0,
   className,
 }: StatTickerProps) {
-  const [display, setDisplay] = React.useState(0)
+  // Start at the final value, not 0: if the observer never fires (SSR, no-JS
+  // hydration, headless render, slow connection) the reader sees correct data
+  // instead of a broken-looking zero.
+  const [display, setDisplay] = React.useState(value)
   const ref = React.useRef<HTMLDivElement>(null)
   const started = React.useRef(false)
 
@@ -53,6 +56,7 @@ export function StatTicker({
         for (const entry of entries) {
           if (!entry.isIntersecting || started.current) continue
           started.current = true
+          setDisplay(0)
           const t0 = performance.now()
           const tick = (now: number) => {
             const p = Math.min((now - t0) / durationMs, 1)
