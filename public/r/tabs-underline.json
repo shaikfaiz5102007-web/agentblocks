@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tabs-underline",
+  "title": "Tabs Underline",
+  "description": "Keyboard-navigable tabs with a sliding underline. Roving tabindex, arrow-key support, aria-selected and aria-controls wired.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/tabs-underline.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n/**\n * TabsUnderline — keyboard-navigable tabs with a sliding underline.\n * Design: roving tabindex, arrow keys, aria-selected; underline is a\n * transform-only indicator so it animates on the compositor.\n */\nexport interface TabItem { id: string; label: string; content: React.ReactNode }\nexport interface TabsUnderlineProps { tabs: TabItem[]; className?: string }\n\nexport function TabsUnderline({ tabs, className }: TabsUnderlineProps) {\n  const [active, setActive] = React.useState(0)\n  const refs = React.useRef<(HTMLButtonElement | null)[]>([])\n\n  const onKey = (e: React.KeyboardEvent) => {\n    if (e.key !== \"ArrowRight\" && e.key !== \"ArrowLeft\") return\n    e.preventDefault()\n    const next = e.key === \"ArrowRight\"\n      ? (active + 1) % tabs.length\n      : (active - 1 + tabs.length) % tabs.length\n    setActive(next)\n    refs.current[next]?.focus()\n  }\n\n  return (\n    <div className={className}>\n      <div role=\"tablist\" onKeyDown={onKey} className=\"relative flex gap-1 border-b border-border\">\n        {tabs.map((t, i) => (\n          <button\n            key={t.id}\n            ref={(el) => { refs.current[i] = el }}\n            role=\"tab\"\n            id={`tab-${t.id}`}\n            aria-selected={active === i}\n            aria-controls={`panel-${t.id}`}\n            tabIndex={active === i ? 0 : -1}\n            onClick={() => setActive(i)}\n            className={cn(\n              \"relative h-11 px-4 text-sm transition-colors duration-200\",\n              active === i ? \"text-foreground\" : \"text-muted-foreground hover:text-foreground/80\"\n            )}\n          >\n            {t.label}\n            {active === i && (\n              <span className=\"absolute inset-x-2 -bottom-px h-0.5 rounded-full bg-foreground\" />\n            )}\n          </button>\n        ))}\n      </div>\n      {tabs.map((t, i) => (\n        <div\n          key={t.id}\n          role=\"tabpanel\"\n          id={`panel-${t.id}`}\n          aria-labelledby={`tab-${t.id}`}\n          hidden={active !== i}\n          className=\"pt-5 text-sm text-pretty leading-relaxed text-muted-foreground\"\n        >\n          {t.content}\n        </div>\n      ))}\n    </div>\n  )\n}\n",
+      "type": "registry:block"
+    }
+  ],
+  "type": "registry:block"
+}

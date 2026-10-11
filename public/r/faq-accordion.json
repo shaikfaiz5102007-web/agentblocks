@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "faq-accordion",
+  "title": "FAQ Accordion",
+  "description": "Accessible disclosure list with single-open behaviour. Animates height via the grid-rows technique without measuring; aria-expanded wired.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/faq-accordion.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n/**\n * FaqAccordion — accessible disclosure list.\n * Design: grid-rows trick animates height without measuring; single-open\n * behaviour reduces cognitive load; aria-expanded wired correctly.\n */\nexport interface FaqItem { q: string; a: string }\nexport interface FaqAccordionProps { items: FaqItem[]; className?: string }\n\nexport function FaqAccordion({ items, className }: FaqAccordionProps) {\n  const [open, setOpen] = React.useState<number | null>(0)\n\n  return (\n    <div className={cn(\"divide-y divide-border rounded-2xl border border-border\", className)}>\n      {items.map((it, i) => {\n        const isOpen = open === i\n        return (\n          <div key={i} className=\"px-5\">\n            <button\n              type=\"button\"\n              aria-expanded={isOpen}\n              onClick={() => setOpen(isOpen ? null : i)}\n              className=\"flex w-full items-center justify-between gap-4 py-4 text-left transition-colors duration-200 hover:text-foreground/80\"\n            >\n              <span className=\"text-sm font-medium text-pretty\">{it.q}</span>\n              <svg\n                viewBox=\"0 0 16 16\" aria-hidden\n                className={cn(\n                  \"size-4 shrink-0 text-muted-foreground\",\n                  \"transition-transform duration-300 ease-out\",\n                  isOpen && \"rotate-45\"\n                )}\n                fill=\"none\" stroke=\"currentColor\" strokeWidth=\"1.75\" strokeLinecap=\"round\"\n              >\n                <path d=\"M8 3v10M3 8h10\" />\n              </svg>\n            </button>\n            <div\n              className={cn(\n                \"grid transition-[grid-template-rows,opacity] duration-300 ease-out\",\n                isOpen ? \"grid-rows-[1fr] opacity-100\" : \"grid-rows-[0fr] opacity-0\"\n              )}\n            >\n              <div className=\"overflow-hidden\">\n                <p className=\"pb-4 text-sm text-pretty leading-relaxed text-muted-foreground\">\n                  {it.a}\n                </p>\n              </div>\n            </div>\n          </div>\n        )\n      })}\n    </div>\n  )\n}\n",
+      "type": "registry:block"
+    }
+  ],
+  "type": "registry:block"
+}

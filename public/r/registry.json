@@ -1,0 +1,347 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "agentblocks",
+  "homepage": "https://agentblocks.dev",
+  "items": [
+    {
+      "name": "button-shine",
+      "type": "registry:ui",
+      "title": "Button Shine",
+      "description": "Primary action button with a sweep-highlight hover effect, press feedback, and 44px touch target. Exact-property transitions and reduced-motion safe.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/button-shine.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "stat-ticker",
+      "type": "registry:ui",
+      "title": "Stat Ticker",
+      "description": "Animated count-up statistic with label. Counts once on scroll into view using IntersectionObserver; uses tabular-nums to prevent layout shift.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/stat-ticker.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "pricing-toggle",
+      "type": "registry:block",
+      "title": "Pricing Toggle",
+      "description": "Three-tier pricing table with an accessible monthly/annual switch. Concentric border radii, tabular prices, keyboard-operable switch.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/pricing-toggle.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "hero-spotlight",
+      "type": "registry:block",
+      "title": "Hero Spotlight",
+      "description": "Landing hero with a cursor-following spotlight and gradient mesh. Writes pointer position to CSS variables so paint stays on the compositor with no re-render.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/hero-spotlight.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "pricing-ladder",
+      "type": "registry:block",
+      "title": "Pricing Ladder",
+      "description": "Four-rung value ladder with anchor ordering, decoy highlighting, percentage discounts and a checkout order bump. Applies anchoring, the decoy effect, the rule of 100, charm pricing and loss-aversion framing. tabular-nums keeps prices stable.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/pricing-ladder.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "navbar-sticky",
+      "type": "registry:block",
+      "title": "Navbar Sticky",
+      "description": "Header that gains a blurred surface after scroll. Fixed height so there is no layout shift; backdrop blur only past a threshold so first paint stays cheap.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/navbar-sticky.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "footer-columns",
+      "type": "registry:block",
+      "title": "Footer Columns",
+      "description": "Multi-column footer with a separated legal bar. Hover states on links, uppercase column headings.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/footer-columns.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "testimonial-wall",
+      "type": "registry:block",
+      "title": "Testimonial Wall",
+      "description": "CSS-columns masonry of quote cards. No JS layout, no stagger animation, text-pretty to avoid orphans.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/testimonial-wall.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "logo-cloud",
+      "type": "registry:block",
+      "title": "Logo Cloud",
+      "description": "Infinite marquee of wordmarks. Transform-only animation, seamless duplicate track, pauses on hover and disables under reduced motion.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/logo-cloud.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "feature-bento",
+      "type": "registry:block",
+      "title": "Feature Bento",
+      "description": "Asymmetric feature grid with deliberate spans. Concentric radii and hover elevation.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/feature-bento.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "cta-band",
+      "type": "registry:block",
+      "title": "CTA Band",
+      "description": "Full-width closing call to action with a radial gradient wash and balanced headline.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/cta-band.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "faq-accordion",
+      "type": "registry:block",
+      "title": "FAQ Accordion",
+      "description": "Accessible disclosure list with single-open behaviour. Animates height via the grid-rows technique without measuring; aria-expanded wired.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/faq-accordion.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "marquee-text",
+      "type": "registry:block",
+      "title": "Marquee Text",
+      "description": "Large scrolling headline strip. Two rows can run in opposite directions; pauses on hover, disabled for reduced motion.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/marquee-text.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "tabs-underline",
+      "type": "registry:block",
+      "title": "Tabs Underline",
+      "description": "Keyboard-navigable tabs with a sliding underline. Roving tabindex, arrow-key support, aria-selected and aria-controls wired.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/tabs-underline.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "avatar-group",
+      "type": "registry:block",
+      "title": "Avatar Group",
+      "description": "Overlapping avatars with a +N overflow chip. Concentric ring uses the surface colour so overlaps read on any background.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/avatar-group.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "bento-gallery",
+      "type": "registry:block",
+      "title": "Bento Gallery",
+      "description": "Image bento grid with lazy loading and hover zoom. Subtle outline keeps images from bleeding into the surface.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/bento-gallery.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "stats-grid",
+      "type": "registry:block",
+      "title": "Stats Grid",
+      "description": "Divided metric row with responsive dividers. tabular-nums keeps figures from shifting.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/stats-grid.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "feature-split",
+      "type": "registry:block",
+      "title": "Feature Split",
+      "description": "Alternating two-column feature section with an optional bullet list and media slot.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/feature-split.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "integrations-grid",
+      "type": "registry:block",
+      "title": "Integrations Grid",
+      "description": "Dense logo tile grid for integration lists. Hover state via border and background only.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/integrations-grid.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "contact-form",
+      "type": "registry:block",
+      "title": "Contact Form",
+      "description": "Labelled form with inline validation. Labels always visible, 44px targets, errors tied via aria-describedby and aria-invalid.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/contact-form.tsx",
+          "type": "registry:block"
+        }
+      ]
+    }
+  ]
+}

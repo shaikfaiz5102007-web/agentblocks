@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "feature-bento",
+  "title": "Feature Bento",
+  "description": "Asymmetric feature grid with deliberate spans. Concentric radii and hover elevation.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/feature-bento.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n/**\n * FeatureBento — asymmetric feature grid.\n * Design: concentric radii (outer 2xl, inner xl with p-6), spans read as a\n * deliberate hierarchy rather than a uniform card wall.\n */\nexport interface BentoItem {\n  title: string\n  body: string\n  icon?: React.ReactNode\n  span?: \"1\" | \"2\" | \"wide\"\n}\nexport interface FeatureBentoProps { items: BentoItem[]; className?: string }\n\nexport function FeatureBento({ items, className }: FeatureBentoProps) {\n  return (\n    <div className={cn(\"grid gap-5 md:grid-cols-3\", className)}>\n      {items.map((it) => (\n        <div\n          key={it.title}\n          className={cn(\n            \"group relative overflow-hidden rounded-2xl border border-border bg-card p-6\",\n            \"transition-[border-color,box-shadow] duration-200 ease-out\",\n            \"hover:border-foreground/20 hover:shadow-[0_16px_40px_-20px_rgba(0,0,0,0.4)]\",\n            it.span === \"2\" && \"md:col-span-2\",\n            it.span === \"wide\" && \"md:col-span-3\"\n          )}\n        >\n          {it.icon && (\n            <div className=\"mb-4 inline-flex size-10 items-center justify-center rounded-xl border border-border bg-background text-foreground/70\">\n              {it.icon}\n            </div>\n          )}\n          <h3 className=\"text-sm font-medium tracking-tight\">{it.title}</h3>\n          <p className=\"mt-2 text-sm text-pretty leading-relaxed text-muted-foreground\">\n            {it.body}\n          </p>\n        </div>\n      ))}\n    </div>\n  )\n}\n",
+      "type": "registry:block"
+    }
+  ],
+  "type": "registry:block"
+}

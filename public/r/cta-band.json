@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "cta-band",
+  "title": "CTA Band",
+  "description": "Full-width closing call to action with a radial gradient wash and balanced headline.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/cta-band.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n/** CtaBand — full-width closing call to action with a gradient wash. */\nexport interface CtaBandProps {\n  headline: string\n  subcopy?: string\n  primary?: { label: string; href: string }\n  secondary?: { label: string; href: string }\n  className?: string\n}\n\nexport function CtaBand({ headline, subcopy, primary, secondary, className }: CtaBandProps) {\n  return (\n    <section className={cn(\"relative isolate overflow-hidden px-6 py-20\", className)}>\n      <div\n        aria-hidden\n        className=\"pointer-events-none absolute inset-0 -z-10 [background:radial-gradient(70%_60%_at_50%_100%,oklch(0.7_0.15_270/0.22),transparent_70%)]\"\n      />\n      <div className=\"mx-auto flex max-w-2xl flex-col items-center text-center\">\n        <h2 className=\"text-balance text-3xl font-semibold tracking-tight sm:text-4xl\">\n          {headline}\n        </h2>\n        {subcopy && (\n          <p className=\"mt-4 text-pretty text-muted-foreground\">{subcopy}</p>\n        )}\n        {(primary || secondary) && (\n          <div className=\"mt-8 flex flex-col gap-3 sm:flex-row\">\n            {primary && (\n              <a href={primary.href}\n                className=\"inline-flex h-12 items-center justify-center rounded-xl bg-foreground px-6 text-sm font-medium text-background transition-transform duration-200 ease-out active:scale-[0.96]\">\n                {primary.label}\n              </a>\n            )}\n            {secondary && (\n              <a href={secondary.href}\n                className=\"inline-flex h-12 items-center justify-center rounded-xl border border-border bg-background px-6 text-sm font-medium transition-colors duration-200 hover:bg-accent\">\n                {secondary.label}\n              </a>\n            )}\n          </div>\n        )}\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:block"
+    }
+  ],
+  "type": "registry:block"
+}

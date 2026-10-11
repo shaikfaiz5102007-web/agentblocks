@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "feature-split",
+  "title": "Feature Split",
+  "description": "Alternating two-column feature section with an optional bullet list and media slot.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/feature-split.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n/** FeatureSplit — alternating two-column feature section. */\nexport interface FeatureSplitProps {\n  eyebrow?: string\n  headline: string\n  body: string\n  bullets?: string[]\n  media?: React.ReactNode\n  reverse?: boolean\n  className?: string\n}\n\nexport function FeatureSplit({ eyebrow, headline, body, bullets, media, reverse, className }: FeatureSplitProps) {\n  return (\n    <section className={cn(\"grid items-center gap-10 md:grid-cols-2 md:gap-16\", className)}>\n      <div className={cn(reverse && \"md:order-2\")}>\n        {eyebrow && (\n          <span className=\"text-xs font-medium uppercase tracking-wider text-muted-foreground\">\n            {eyebrow}\n          </span>\n        )}\n        <h2 className=\"mt-3 text-balance text-2xl font-semibold tracking-tight sm:text-3xl\">\n          {headline}\n        </h2>\n        <p className=\"mt-4 text-pretty leading-relaxed text-muted-foreground\">{body}</p>\n        {bullets && (\n          <ul className=\"mt-6 flex flex-col gap-3\">\n            {bullets.map((b) => (\n              <li key={b} className=\"flex items-start gap-3 text-sm\">\n                <svg viewBox=\"0 0 16 16\" aria-hidden className=\"mt-0.5 size-4 shrink-0 text-foreground/60\"\n                  fill=\"none\" stroke=\"currentColor\" strokeWidth=\"1.75\" strokeLinecap=\"round\" strokeLinejoin=\"round\">\n                  <path d=\"M3 8.5 6.2 11.7 13 5\" />\n                </svg>\n                <span className=\"text-pretty\">{b}</span>\n              </li>\n            ))}\n          </ul>\n        )}\n      </div>\n      <div className={cn(\"overflow-hidden rounded-2xl border border-border bg-muted\", reverse && \"md:order-1\")}>\n        {media ?? <div className=\"aspect-[4/3] w-full\" />}\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:block"
+    }
+  ],
+  "type": "registry:block"
+}

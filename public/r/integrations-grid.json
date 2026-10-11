@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "integrations-grid",
+  "title": "Integrations Grid",
+  "description": "Dense logo tile grid for integration lists. Hover state via border and background only.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/integrations-grid.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n/** IntegrationsGrid — dense logo tile grid with search-free hover states. */\nexport interface Integration { name: string; icon?: React.ReactNode }\nexport interface IntegrationsGridProps { items: Integration[]; className?: string }\n\nexport function IntegrationsGrid({ items, className }: IntegrationsGridProps) {\n  return (\n    <div className={cn(\"grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4\", className)}>\n      {items.map((it) => (\n        <div\n          key={it.name}\n          className={cn(\n            \"flex items-center gap-3 rounded-xl border border-border bg-card p-4\",\n            \"transition-[border-color,background-color] duration-200 ease-out hover:border-foreground/20 hover:bg-accent\"\n          )}\n        >\n          <div className=\"grid size-9 shrink-0 place-items-center rounded-lg border border-border bg-background text-xs font-medium\">\n            {it.icon ?? it.name.slice(0, 2)}\n          </div>\n          <span className=\"truncate text-sm\">{it.name}</span>\n        </div>\n      ))}\n    </div>\n  )\n}\n",
+      "type": "registry:block"
+    }
+  ],
+  "type": "registry:block"
+}

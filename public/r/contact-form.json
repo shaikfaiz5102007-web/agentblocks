@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "contact-form",
+  "title": "Contact Form",
+  "description": "Labelled form with inline validation. Labels always visible, 44px targets, errors tied via aria-describedby and aria-invalid.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/contact-form.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n/**\n * ContactForm — labelled form with inline validation states.\n * Design: labels always visible (never placeholder-as-label), 44px targets,\n * error text tied via aria-describedby, focus rings preserved.\n */\nexport interface Field { name: string; label: string; type?: string; required?: boolean; textarea?: boolean }\nexport interface ContactFormProps {\n  fields: Field[]\n  submitLabel?: string\n  onSubmit?: (values: Record<string, string>) => void\n  className?: string\n}\n\nexport function ContactForm({ fields, submitLabel = \"Send message\", onSubmit, className }: ContactFormProps) {\n  const [errors, setErrors] = React.useState<Record<string, string>>({})\n\n  const handle = (e: React.FormEvent<HTMLFormElement>) => {\n    e.preventDefault()\n    const fd = new FormData(e.currentTarget)\n    const values: Record<string, string> = {}\n    const next: Record<string, string> = {}\n    for (const f of fields) {\n      const v = String(fd.get(f.name) ?? \"\").trim()\n      values[f.name] = v\n      if (f.required && !v) next[f.name] = `${f.label} is required`\n      if (f.type === \"email\" && v && !/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(v))\n        next[f.name] = \"Enter a valid email address\"\n    }\n    setErrors(next)\n    if (Object.keys(next).length === 0) onSubmit?.(values)\n  }\n\n  return (\n    <form onSubmit={handle} noValidate className={cn(\"flex flex-col gap-5\", className)}>\n      {fields.map((f) => {\n        const err = errors[f.name]\n        const id = `f-${f.name}`\n        const common = cn(\n          \"w-full rounded-xl border bg-background px-3.5 text-sm\",\n          \"transition-[border-color,box-shadow] duration-200 ease-out\",\n          \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/30\",\n          err ? \"border-red-500/60\" : \"border-border\"\n        )\n        return (\n          <div key={f.name} className=\"flex flex-col gap-1.5\">\n            <label htmlFor={id} className=\"text-sm font-medium\">\n              {f.label}\n              {f.required && <span className=\"ml-1 text-muted-foreground\">*</span>}\n            </label>\n            {f.textarea ? (\n              <textarea id={id} name={f.name} rows={4} aria-describedby={err ? `${id}-err` : undefined}\n                aria-invalid={!!err} className={cn(common, \"py-2.5\")} />\n            ) : (\n              <input id={id} name={f.name} type={f.type ?? \"text\"} aria-describedby={err ? `${id}-err` : undefined}\n                aria-invalid={!!err} className={cn(common, \"h-11\")} />\n            )}\n            {err && <span id={`${id}-err`} className=\"text-xs text-red-500\">{err}</span>}\n          </div>\n        )\n      })}\n      <button\n        type=\"submit\"\n        className=\"inline-flex h-11 items-center justify-center rounded-xl bg-foreground px-5 text-sm font-medium text-background transition-transform duration-200 ease-out active:scale-[0.96]\"\n      >\n        {submitLabel}\n      </button>\n    </form>\n  )\n}\n",
+      "type": "registry:block"
+    }
+  ],
+  "type": "registry:block"
+}

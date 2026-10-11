@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "marquee-text",
+  "title": "Marquee Text",
+  "description": "Large scrolling headline strip. Two rows can run in opposite directions; pauses on hover, disabled for reduced motion.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/marquee-text.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n/** MarqueeText — large scrolling headline strip (two rows, opposite directions). */\nexport interface MarqueeTextProps {\n  items: string[]\n  reverse?: boolean\n  speedSeconds?: number\n  className?: string\n}\n\nexport function MarqueeText({ items, reverse, speedSeconds = 30, className }: MarqueeTextProps) {\n  const track = [...items, ...items]\n  return (\n    <div\n      className={cn(\"group overflow-hidden py-4\", className)}\n      style={{ [\"--dur\" as string]: `${speedSeconds}s` }}\n    >\n      <div\n        className={cn(\n          \"flex w-max gap-8 animate-[marquee2_var(--dur)_linear_infinite] group-hover:[animation-play-state:paused] motion-reduce:animate-none\",\n          reverse && \"[animation-direction:reverse]\"\n        )}\n      >\n        {track.map((t, i) => (\n          <span\n            key={i}\n            className=\"shrink-0 text-4xl font-semibold tracking-tight text-foreground/25 sm:text-6xl\"\n          >\n            {t}\n          </span>\n        ))}\n      </div>\n      <style>{`@keyframes marquee2{from{transform:translateX(0)}to{transform:translateX(-50%)}}`}</style>\n    </div>\n  )\n}\n",
+      "type": "registry:block"
+    }
+  ],
+  "type": "registry:block"
+}

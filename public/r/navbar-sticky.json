@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "navbar-sticky",
+  "title": "Navbar Sticky",
+  "description": "Header that gains a blurred surface after scroll. Fixed height so there is no layout shift; backdrop blur only past a threshold so first paint stays cheap.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/navbar-sticky.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n/**\n * NavbarSticky — header that gains a blurred surface after scroll.\n * Design: exact-property transitions, no layout shift (height fixed),\n * backdrop blur only after threshold so first paint stays cheap.\n */\nexport interface NavbarStickyProps {\n  brand: React.ReactNode\n  links: { label: string; href: string }[]\n  action?: React.ReactNode\n  threshold?: number\n  className?: string\n}\n\nexport function NavbarSticky({ brand, links, action, threshold = 12, className }: NavbarStickyProps) {\n  const [scrolled, setScrolled] = React.useState(false)\n\n  React.useEffect(() => {\n    const onScroll = () => setScrolled(window.scrollY > threshold)\n    onScroll()\n    window.addEventListener(\"scroll\", onScroll, { passive: true })\n    return () => window.removeEventListener(\"scroll\", onScroll)\n  }, [threshold])\n\n  return (\n    <header\n      className={cn(\n        \"sticky top-0 z-50 h-16 w-full\",\n        \"transition-[background-color,border-color,backdrop-filter] duration-300 ease-out\",\n        scrolled\n          ? \"border-b border-border bg-background/70 backdrop-blur-xl\"\n          : \"border-b border-transparent bg-transparent\",\n        className\n      )}\n    >\n      <nav className=\"mx-auto flex h-full max-w-6xl items-center gap-8 px-6\">\n        <div className=\"shrink-0 font-medium tracking-tight\">{brand}</div>\n        <ul className=\"hidden flex-1 items-center gap-1 md:flex\">\n          {links.map((l) => (\n            <li key={l.href}>\n              <a\n                href={l.href}\n                className=\"inline-flex h-9 items-center rounded-lg px-3 text-sm text-muted-foreground transition-colors duration-200 hover:bg-accent hover:text-foreground\"\n              >\n                {l.label}\n              </a>\n            </li>\n          ))}\n        </ul>\n        <div className=\"ml-auto shrink-0 md:ml-0\">{action}</div>\n      </nav>\n    </header>\n  )\n}\n",
+      "type": "registry:block"
+    }
+  ],
+  "type": "registry:block"
+}

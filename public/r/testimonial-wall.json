@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "testimonial-wall",
+  "title": "Testimonial Wall",
+  "description": "CSS-columns masonry of quote cards. No JS layout, no stagger animation, text-pretty to avoid orphans.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/testimonial-wall.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n/**\n * TestimonialWall — CSS-columns masonry of quote cards.\n * Design: columns avoid JS layout, text-pretty stops orphans, no stagger\n * (routine content, not a staged entrance).\n */\nexport interface Testimonial { quote: string; name: string; role?: string }\nexport interface TestimonialWallProps {\n  items: Testimonial[]\n  columns?: 2 | 3\n  className?: string\n}\n\nexport function TestimonialWall({ items, columns = 3, className }: TestimonialWallProps) {\n  return (\n    <div\n      className={cn(\n        \"gap-5 [column-fill:_balance]\",\n        columns === 2 ? \"sm:columns-2\" : \"sm:columns-2 lg:columns-3\",\n        className\n      )}\n    >\n      {items.map((t, i) => (\n        <figure\n          key={i}\n          className={cn(\n            \"mb-5 break-inside-avoid rounded-2xl border border-border bg-card p-5\",\n            \"transition-[border-color,box-shadow] duration-200 ease-out\",\n            \"hover:border-foreground/20 hover:shadow-[0_12px_32px_-16px_rgba(0,0,0,0.35)]\"\n          )}\n        >\n          <blockquote className=\"text-sm text-pretty leading-relaxed\">\n            &ldquo;{t.quote}&rdquo;\n          </blockquote>\n          <figcaption className=\"mt-4 flex flex-col\">\n            <span className=\"text-sm font-medium\">{t.name}</span>\n            {t.role && <span className=\"text-xs text-muted-foreground\">{t.role}</span>}\n          </figcaption>\n        </figure>\n      ))}\n    </div>\n  )\n}\n",
+      "type": "registry:block"
+    }
+  ],
+  "type": "registry:block"
+}

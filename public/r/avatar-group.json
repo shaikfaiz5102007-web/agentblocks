@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "avatar-group",
+  "title": "Avatar Group",
+  "description": "Overlapping avatars with a +N overflow chip. Concentric ring uses the surface colour so overlaps read on any background.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/avatar-group.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n/**\n * AvatarGroup — overlapping avatars with a count overflow.\n * Design: concentric ring (border uses the surface colour so overlaps read\n * cleanly on any background), hover raises one avatar via transform only.\n */\nexport interface AvatarGroupProps {\n  people: { name: string; src?: string }[]\n  max?: number\n  size?: number\n  className?: string\n}\n\nexport function AvatarGroup({ people, max = 4, size = 36, className }: AvatarGroupProps) {\n  const shown = people.slice(0, max)\n  const extra = people.length - shown.length\n\n  return (\n    <div className={cn(\"flex items-center\", className)}>\n      {shown.map((p, i) => (\n        <div\n          key={p.name}\n          title={p.name}\n          style={{ width: size, height: size, marginLeft: i === 0 ? 0 : -size / 3, zIndex: shown.length - i }}\n          className={cn(\n            \"relative grid place-items-center overflow-hidden rounded-full\",\n            \"bg-muted text-xs font-medium text-muted-foreground\",\n            \"ring-2 ring-background transition-transform duration-200 ease-out hover:-translate-y-0.5\"\n          )}\n        >\n          {p.src ? (\n            <img src={p.src} alt={p.name} className=\"size-full object-cover outline-1 outline-black/10 dark:outline-white/10\" />\n          ) : (\n            p.name.slice(0, 1).toUpperCase()\n          )}\n        </div>\n      ))}\n      {extra > 0 && (\n        <div\n          style={{ width: size, height: size, marginLeft: -size / 3 }}\n          className=\"relative grid place-items-center rounded-full bg-foreground text-xs font-medium text-background ring-2 ring-background\"\n        >\n          +{extra}\n        </div>\n      )}\n    </div>\n  )\n}\n",
+      "type": "registry:block"
+    }
+  ],
+  "type": "registry:block"
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-shine",
+  "title": "Button Shine",
+  "description": "Primary action button with a sweep-highlight hover effect, press feedback, and 44px touch target. Exact-property transitions and reduced-motion safe.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/button-shine.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\n/**\n * ButtonShine — a primary action button with a sweep-highlight hover effect.\n *\n * Design notes (why it feels right):\n * - transition lists exact properties, never `all`\n * - scale(0.96) on press, the tactile sweet spot\n * - 44px min hit area for touch\n * - respects prefers-reduced-motion\n */\nexport interface ButtonShineProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  variant?: \"default\" | \"outline\" | \"ghost\"\n  size?: \"sm\" | \"md\" | \"lg\"\n}\n\nexport const ButtonShine = React.forwardRef<HTMLButtonElement, ButtonShineProps>(\n  ({ className, variant = \"default\", size = \"md\", children, ...props }, ref) => {\n    const base =\n      \"group relative inline-flex items-center justify-center gap-2 overflow-hidden \" +\n      \"rounded-xl font-medium tracking-tight select-none \" +\n      \"transition-[transform,background-color,border-color,color,box-shadow] duration-200 ease-out \" +\n      \"active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 \" +\n      \"focus-visible:ring-offset-2 focus-visible:ring-offset-background \" +\n      \"focus-visible:ring-foreground/40 disabled:pointer-events-none disabled:opacity-50\"\n\n    const sizes = {\n      sm: \"h-9 px-3.5 text-sm\",\n      md: \"h-11 px-5 text-sm\",\n      lg: \"h-12 px-6 text-base\",\n    } as const\n\n    const variants = {\n      default:\n        \"bg-foreground text-background shadow-[0_1px_0_0_rgba(255,255,255,0.15)_inset,0_8px_24px_-8px_rgba(0,0,0,0.5)] \" +\n        \"hover:shadow-[0_1px_0_0_rgba(255,255,255,0.2)_inset,0_12px_32px_-8px_rgba(0,0,0,0.6)]\",\n      outline:\n        \"border border-border bg-background text-foreground hover:bg-accent\",\n      ghost: \"text-foreground hover:bg-accent\",\n    } as const\n\n    return (\n      <button\n        ref={ref}\n        className={cn(base, sizes[size], variants[variant], className)}\n        {...props}\n      >\n        {/* Sweep highlight — transform/opacity only, GPU composited */}\n        <span\n          aria-hidden\n          className=\"pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full motion-reduce:hidden\"\n        />\n        <span className=\"relative z-10 inline-flex items-center gap-2\">\n          {children}\n        </span>\n      </button>\n    )\n  }\n)\nButtonShine.displayName = \"ButtonShine\"\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
